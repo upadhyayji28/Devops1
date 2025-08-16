@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub-cred')  // Jenkins credentials ID
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-cred')
         DOCKER_IMAGE = "your-dockerhub-username/devops1-frontend"
     }
 
@@ -19,14 +19,9 @@ pipeline {
             }
         }
 
-        stage('Login to DockerHub') {
+        stage('Login & Push to DockerHub') {
             steps {
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-            }
-        }
-
-        stage('Push Docker Image') {
-            steps {
                 sh 'docker push $DOCKER_IMAGE'
             }
         }
@@ -34,7 +29,9 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 sh 'kubectl apply -f k8s-deployment.yaml'
+                sh 'kubectl rollout status deployment/devops1-deployment'
             }
         }
     }
 }
+
