@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NCARE - NDIS Provider</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #e74c3c; /* Red */
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        
+        .btn-blue {
+            background: #3498db; /* Blue */
+        }
+        
+        .btn:hover {
+            background: #c0392b; /* Darker red */
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .btn-blue:hover {
+            background: #2980b9; /* Darker blue */
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        h1, h2, h3, h4 {
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            color: #2c3e50; /* Dark blue */
+            font-size: 2.8rem;
+        }
+        
+        h2 {
+            color: #e74c3c; /* Red */
+            font-size: 2.2rem;
+        }
+        
+        h3 {
+            color: #3498db; /* Blue */
+            font-size: 1.6rem;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: #555;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Header Styles */
+        header {
+            background: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #e74c3c; /* Red */
+        }
+        
+        .logo span {
+            color: #3498db; /* Blue */
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #2c3e50; /* Dark blue */
+            font-weight: 600;
+            transition: color 0.3s;
+            font-size: 16px;
+        }
+        
+        .nav-links a:hover {
+            color: #e74c3c; /* Red */
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            margin-top: 0;
+            padding-top: 80px;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 35px;
+            color: #f8f8f8;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* About Section */
+        .about {
+            text-align: center;
+            background: #f9f9f9;
+        }
+        
+        .about h2 {
+            font-size: 2.5rem;
+        }
+        
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            margin-top: 50px;
+            text-align: left;
+        }
+        
+        .about-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            height: 100%;
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Services Section */
+        .services {
+            text-align: center;
+            background: white;
+        }
+        
+        .services h2 {
+            color: #e74c3c; /* Red */
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+            border-top: 4px solid #3498db; /* Blue */
+            text-align: left;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        .service-img-container {
+            height: 220px;
+            overflow: hidden;
+        }
+        
+        .service-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .service-card:hover img {
+            transform: scale(1.1);
+        }
+        
+        .service-content {
+            padding: 25px;
+        }
+        
+        /* Stats Section */
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            padding: 70px 0;
+            background: #3498db; /* Blue */
+            color: white;
+        }
+        
+        .stat-item h3 {
+            font-size: 42px;
+            color: white;
+            margin-bottom: 10px;
+        }
+        
+        .stat-item p {
+            color: #f8f8f8;
+            font-size: 18px;
+        }
+        
+        /* Process Section */
+        .process {
+            text-align: center;
+            background: #f9f9f9;
+        }
+        
+        .process h2 {
+            color: #e74c3c; /* Red */
+        }
+        
+        .process-steps {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .step {
+            max-width: 280px;
+            margin: 20px;
+        }
+        
+        .step-number {
+            background: #e74c3c; /* Red */
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-weight: bold;
+            font-size: 24px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .step-image {
+            width: 100%;
+            height: 180px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .step-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Gallery Section */
+        .gallery {
+            text-align: center;
+            background: white;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 50px;
+        }
+        
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            position: relative;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+        
+        .gallery-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(231, 76, 60, 0.9); /* Red with transparency */
+            color: white;
+            padding: 15px;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+        
+        /* Team Section */
+        .team {
+            text-align: center;
+            background: #f9f9f9;
+        }
+        
+        .team h2 {
+            color: #e74c3c; /* Red */
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .team-member {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+        
+        .team-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 3px solid #3498db; /* Blue */
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            background: #2c3e50; /* Dark blue */
+            color: white;
+            text-align: center;
+        }
+        
+        .testimonials h2 {
+            color: white;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            color: #333;
+            transition: transform 0.3s;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .testimonial-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 3px solid #3498db; /* Blue */
+        }
+        
+        .stars {
+            color: #f1c40f;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        /* Contact Section */
+        .contact {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            background: white;
+        }
+        
+        .contact-info {
+            background: #3498db; /* Blue */
+            color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .contact-info h2 {
+            color: white;
+        }
+        
+        .contact-img {
+            width: 100%;
+            border-radius: 10px;
+            margin-top: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .contact-form input,
+        .contact-form textarea,
+        .contact-form select {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .contact-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background: #2c3e50; /* Dark blue */
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #e74c3c; /* Red */
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo span {
+            color: #3498db; /* Blue */
+        }
+        
+        .footer-links h3 {
+            color: #3498db; /* Blue */
+            margin-bottom: 25px;
+            font-size: 20px;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links ul li a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 15px;
+        }
+        
+        .footer-links ul li a:hover {
+            color: #e74c3c; /* Red */
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #34495e;
+            color: white;
+            border-radius: 50%;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .social-links a:hover {
+            background-color: #e74c3c; /* Red */
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            border-top: 1px solid #34495e;
+            padding-top: 25px;
+            text-align: center;
+            color: #bdc3c7;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .services-grid,
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .about-grid,
+            .testimonial-grid,
+            .gallery-grid,
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .contact {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .process-steps {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .step {
+                margin-bottom: 40px;
+            }
+            
+            .stats {
+                flex-direction: column;
+            }
+            
+            .stat-item {
+                margin-bottom: 30px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                background: none;
+                border: none;
+                color: #2c3e50;
+                font-size: 24px;
+                cursor: pointer;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.4rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .about-grid,
+            .services-grid,
+            .testimonial-grid,
+            .team-grid,
+            .gallery-grid,
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">N<span>care</span></div>
+                <button class="mobile-menu-btn">☰</button>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Provide Support To Disability</h1>
+                <p>Free Consultation for all NDIS participants across Australia</p>
+                <div>
+                    <a href="#contact" class="btn">Get Started</a>
+                    <a href="#services" class="btn btn-blue">Our Services</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2>KNOW MORE ABOUT US</h2>
+            <p>Best Safety NDIS Providers In Sydney Provide Service</p>
+            
+            <div class="about-grid">
+                <div>
+                    <h3>EXPLORE SERVICES WITH US</h3>
+                    <p>Fast And Reliable Services</p>
+                    <p>We are committed to providing high-quality support services to people with disabilities across Australia. Our team of dedicated professionals ensures that every participant receives personalized care tailored to their specific needs.</p>
+                    <p>With years of experience in the disability sector, we have helped thousands of individuals achieve greater independence and improve their quality of life.</p>
+                    <a href="#services" class="btn">Our Services</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1527613426441-4da17471b66d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Caregiver assisting disabled person">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2>OUR SERVICES</h2>
+            <p>Comprehensive care solutions tailored to your needs</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-img-container">
+                        <img src="https://images.unsplash.com/photo-1505576399279-565b52d4ac71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Home Aged Care">
+                    </div>
+                    <div class="service-content">
+                        <h3>Home Aged Care</h3>
+                        <p>Professional in-home care services for elderly individuals, ensuring comfort and safety in their own homes.</p>
+                        <a href="#" class="btn">Read More</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-img-container">
+                        <img src="https://images.unsplash.com/photo-1582732970804-34c1b64a1dfe?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Disability Housing">
+                    </div>
+                    <div class="service-content">
+                        <h3>Disability Housing</h3>
+                        <p>Specialized accommodation solutions designed for people with disabilities, promoting independence.</p>
+                        <a href="#" class="btn">Read More</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-img-container">
+                        <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Allied Healthcare">
+                    </div>
+                    <div class="service-content">
+                        <h3>Allied Healthcare</h3>
+                        <p>Access to a range of allied health professionals including physiotherapists and occupational therapists.</p>
+                        <a href="#" class="btn">Read More</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-img-container">
+                        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Community Nursing">
+                    </div>
+                    <div class="service-content">
+                        <h3>Community Nursing</h3>
+                        <p>Professional nursing care provided in the comfort of your home or community setting.</p>
+                        <a href="#" class="btn">Read More</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-img-container">
+                        <img src="https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Domestic Assistance">
+                    </div>
+                    <div class="service-content">
+                        <h3>Domestic Assistance</h3>
+                        <p>Help with household tasks to maintain a clean, safe and comfortable living environment.</p>
+                        <a href="#" class="btn">Read More</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-img-container">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Physical Activities">
+                    </div>
+                    <div class="service-content">
+                        <h3>Physical Activities</h3>
+                        <p>Tailored exercise programs to improve mobility, strength and overall wellbeing.</p>
+                        <a href="#" class="btn">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stat-item">
+                <h3>20k+</h3>
+                <p>Disability People Helped</p>
+            </div>
+            <div class="stat-item">
+                <h3>6420</h3>
+                <p>Happy Participants</p>
+            </div>
+            <div class="stat-item">
+                <h3>2000</h3>
+                <p>Active Support Workers</p>
+            </div>
+            <div class="stat-item">
+                <h3>380</h3>
+                <p>Communities Served</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- More About Section -->
+    <section class="about">
+        <div class="container">
+            <h2>LOOKING FOR NDIS PROVIDERS IN SYDNEY?</h2>
+            <p>There Are Many Variations Of Passages Of Available But Simply Free Text Available In The Market Sit Amed Majority Alteration In Some Form, By Humour Simply Free Text Available In The Market Sit Amed Majority</p>
+            
+            <div class="about-grid">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="NDIS Support">
+                </div>
+                <div>
+                    <h3>A Range Of Programs And Supports In The Disability And Carer Including:</h3>
+                    <ul style="margin-left: 20px; margin-bottom: 20px;">
+                        <li>NDIS And Bushfire And Emergency Support</li>
+                        <li>Compliance And Enforcement Actions</li>
+                        <li>Becoming A Registered Provider Today</li>
+                    </ul>
+                    <p style="margin-top: 30px; font-weight: bold;">Call us: (415) 555-98 76 44</p>
+                    <a href="#contact" class="btn">More About Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process" id="process">
+        <div class="container">
+            <h2>COMPLAINT PROCESS</h2>
+            <p>Complaints Process Of Services</p>
+            <p>There Are Many Variations Of Passages Of Available But Simply Free Available In The Market Sit Amed Majority Alteration In Some</p>
+            
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Unhappy With Your Provider</h3>
+                    <div class="step-image">
+                        <img src="https://images.unsplash.com/photo-1589652717521-10c0d09aafdb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Step 1">
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Talk To Your Provider</h3>
+                    <div class="step-image">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Step 2">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <h2>Explore Our Beautiful Work Memory</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img class="gallery-img" src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Senior Health Care">
+                    <div class="gallery-caption">
+                        <h3>Senior Health Care</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img class="gallery-img" src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="NDIS Health">
+                    <div class="gallery-caption">
+                        <h3>NDIS Health</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img class="gallery-img" src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Community Support">
+                    <div class="gallery-caption">
+                        <h3>Community Support</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img class="gallery-img" src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Physical Therapy">
+                    <div class="gallery-caption">
+                        <h3>Physical Therapy</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img class="gallery-img" src="https://images.unsplash.com/photo-1582732970804-34c1b64a1dfe?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Disability Housing">
+                    <div class="gallery-caption">
+                        <h3>Disability Housing</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img class="gallery-img" src="https://images.unsplash.com/photo-1505576399279-565b52d4ac71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Home Care">
+                    <div class="gallery-caption">
+                        <h3>Home Care</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team" id="team">
+        <div class="container">
+            <h2>MEET OUR TEAM</h2>
+            <p>Dedicated professionals committed to your care</p>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <img class="team-img" src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Dr. Sarah Johnson">
+                    <h3>Dr. Sarah Johnson</h3>
+                    <p>Medical Director</p>
+                </div>
+                <div class="team-member">
+                    <img class="team-img" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Michael Chen">
+                    <h3>Michael Chen</h3>
+                    <p>Operations Manager</p>
+                </div>
+                <div class="team-member">
+                    <img class="team-img" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Emma Wilson">
+                    <h3>Emma Wilson</h3>
+                    <p>Head Nurse</p>
+                </div>
+                <div class="team-member">
+                    <img class="team-img" src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="David Thompson">
+                    <h3>David Thompson</h3>
+                    <p>Therapy Specialist</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2>See Our Clients Feedback</h2>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <img class="testimonial-img" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Sarah Johnson">
+                    <div class="stars">★★★★★</div>
+                    <p>"The support I received from Ncare has been life-changing. Their team is professional, caring and truly understands my needs."</p>
+                    <p><strong>- Sarah Johnson</strong></p>
+                </div>
+                <div class="testimonial-card">
+                    <img class="testimonial-img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Michael Brown">
+                    <div class="stars">★★★★★</div>
+                    <p>"As a parent of a child with disability, finding the right support was challenging until we connected with Ncare. They've made all the difference."</p>
+                    <p><strong>- Michael Brown</strong></p>
+                </div>
+                <div class="testimonial-card">
+                    <img class="testimonial-img" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Lisa Wong">
+                    <div class="stars">★★★★★</div>
+                    <p>"The disability housing solution provided by Ncare has given me independence I never thought possible. Highly recommend their services."</p>
+                    <p><strong>- Lisa Wong</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-info">
+                <h2>NCARE</h2>
+                <p>The world's first and largest digital NDS Organization & Non - Profit Helping Funds</p>
+                <p>86 Read Broklyn Street, 600<br>New York, USA<br>Needhelp@Company.Com</p>
+                
+                <img class="contact-img" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Our Office">
+                
+                <h3 style="margin-top: 30px;">Services Request</h3>
+                <ul style="list-style: none; margin-top: 15px;">
+                    <li>Physical Activities</li>
+                    <li>Disability Housing plan</li>
+                    <li>Allied Healthcare</li>
+                    <li>Community Nursing</li>
+                    <li>Domestic Assistance</li>
+                </ul>
+            </div>
+            
+            <div class="contact-form">
+                <h2>Send Us Message We Will Get Back To Your ASAP!</h2>
+                <form id="contactForm">
+                    <input type="text" placeholder="Your Name*" required>
+                    <input type="email" placeholder="Email Address*" required>
+                    <input type="tel" placeholder="Phone Number">
+                    <select>
+                        <option value="">Select Service</option>
+                        <option value="home-care">Home Aged Care</option>
+                        <option value="housing">Disability Housing</option>
+                        <option value="healthcare">Allied Healthcare</option>
+                        <option value="nursing">Community Nursing</option>
+                        <option value="domestic">Domestic Assistance</option>
+                    </select>
+                    <textarea placeholder="Enter Your Message here" required></textarea>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">N<span>care</span></div>
+                    <p>Providing exceptional disability support services across Australia with compassion and professionalism.</p>
+                    <div class="social-links">
+                        <a href="#"><i>f</i></a>
+                        <a href="#"><i>t</i></a>
+                        <a href="#"><i>in</i></a>
+                        <a href="#"><i>ig</i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Home Aged Care</a></li>
+                        <li><a href="#">Disability Housing</a></li>
+                        <li><a href="#">Allied Healthcare</a></li>
+                        <li><a href="#">Community Nursing</a></li>
+                        <li><a href="#">Domestic Assistance</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li>86 Read Broklyn Street</li>
+                        <li>New York, USA</li>
+                        <li>Phone: (415) 555-9876</li>
+                        <li>Email: needhelp@company.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2024 Themepure. All Rights Reserved | Terms of Use | Privacy Policy</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    navLinks.style.display = 'none';
+                }
+            });
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Form submission
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Thank you for your message! We will get back to you soon.');
+                this.reset();
+            });
+        }
+        
+        // Make images load smoothly
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.style.opacity = '0';
+                img.style.transition = 'opacity 0.5s';
+                img.onload = function() {
+                    this.style.opacity = '1';
+                };
+                // If image is already loaded (from cache)
+                if (img.complete) {
+                    img.style.opacity = '1';
+                }
+            });
+        });
+        
+        // Responsive adjustments
+        function handleResize() {
+            if (window.innerWidth > 768) {
+                navLinks.style.display = 'flex';
+            } else {
+                navLinks.style.display = 'none';
+            }
+        }
+        
+        window.addEventListener('resize', handleResize);
+        handleResize(); // Initialize
+    </script>
+</body>
+</html>
